@@ -43,16 +43,51 @@ int main()
     string flightString;
     ifstream flights("flights.txt");
     while (getline(flights, flightString)){ // fill up the flights list vector. each flight is a edge on the map
+        if (flightString.length() <= 2){
+            continue;
+        } // if its a blank line, skip it
         flight tempFlight;
         string sourceString;
         string destString;
         string priceString;
+        // cout << "flight string: " << flightString  << flightString.length()<< endl;
+
         sourceString = flightString.substr(0,3); // grabs the first 3 charters of each line
         destString = flightString.substr(10,3);
         priceString = flightString.substr(5,3); // grabs price as string and truns it into a int
+        
+        // cout << sourceString << endl;
+        // cout << destString << endl;
+        // cout << priceString << endl;
 
-        cout << sourceString << endl;
-        cout << destString << endl;
-        cout << priceString << endl;
+        tempFlight.price = stoi(priceString); 
+        for (int i = 0; i < airportsList.size(); i++){
+            if (airportsList[i].code == sourceString){
+                tempFlight.source = &airportsList[i]; // sets the source of the flight to the airport with the same code
+            }
+            if (airportsList[i].code == destString){
+                tempFlight.destination = &airportsList[i]; // sets the destination of the flight to the airport with the same code
+            }
         }
+        flightsList.push_back(tempFlight); // adds the flight to the list of flights
+    }  
+
+
+
+
+
+    for (int i = 0; i < airportsList.size(); i++)
+    {
+        cout << "Airport code: " << airportsList[i].code << endl;
+        cout << "Airport name: " << airportsList[i].name << endl;
+        cout << "Airport number: " << airportsList[i].number << endl << endl;
+    }
+    for (int i = 0; i < flightsList.size(); i++)
+    {
+        cout << "Flight source: " << flightsList[i].source->code << endl;
+        cout << "Flight destination: " << flightsList[i].destination->code << endl;
+        cout << "Flight price: " << flightsList[i].price << endl << endl;
+    }
+
+    return 0;
 }
