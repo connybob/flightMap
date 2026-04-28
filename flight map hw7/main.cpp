@@ -19,6 +19,8 @@ struct flight{
 
 };
 
+
+
 int main()
 {
 
@@ -88,6 +90,12 @@ int main()
         cout << "Flight destination: " << flightsList[i].destination->code << endl;
         cout << "Flight price: " << flightsList[i].price << endl << endl;
     }
+
+
+    // need to make enter airport code and print all conections from that airport.
+    
+
+
 
     return 0;
 }
